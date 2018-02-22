@@ -17,4 +17,5 @@ ln -s lua-moses/moses_min.lua moses.lua
 
 
 
-# export LUA_PATH="${HOME:-~}/.lua-bundles/?.lua;;"
+echo "Add to your .bashrc:"
+echo 'export LUA_PATH="${HOME:-~}/.lua-bundles/?.lua;${HOME:-~}/.lua-bundles/?/init.lua;;'
