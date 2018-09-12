@@ -49,9 +49,28 @@ get_or_update_git() {
 
 set -e
 
-get_or_update_git ~/ https://github.com/tst2005/lua-bundles .lua-bundles
+# I'm install.sh
+# $0 can be
+# install.sh
+# ./install.sh
+# /home/USER/.lua-bundles/install.sh
+# /another/path/to/install.sh
+# /anything/else/foo.sh if the user rename the script ...
 
-cd -- ~/.lua-bundles/bundles &&
+# 1. detect the current path
+# 2. cut to have a the lua-bundles repo directory (where install.sh should be)
+# 3. install inside this dir ?
+# 4. generate the env.sh
+
+# the next line is useless with the new way to install
+#get_or_update_git ~/ https://github.com/tst2005/lua-bundles .lua-bundles
+# but we should have :
+git pull -q
+
+# FIXME: the next line ...
+cd -- ~/.lua-bundles &&
+
+cd -- ./bundles &&
 {
 	get_or_update_git . https://github.com/tst2005/lua-mini lua-mini dev
 	symlink_needed . lua-mini/mini mini
@@ -66,6 +85,9 @@ cd -- ~/.lua-bundles/bundles &&
 
 	get_or_update_git . https://github.com/tst2005/lua-utf8string lua-utf8string
 	symlink_needed . lua-utf8string/utf8string.lua utf8string.lua
+
+	get_or_update_git . https://github.com/tst2005/lua-semver lua-semver
+	symlink_needed . lua-semver/semver.lua semver.lua
 
 	echo 'export LUA_PATH="${LUA_PATH:+$LUA_PATH;}./?.lua;./?/init.lua;${HOME:-~}/.lua-bundles/bundles/?.lua;${HOME:-~}/.lua-bundles/bundles/?/init.lua;;"' > ../env.sh
 }
