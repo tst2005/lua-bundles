@@ -6,8 +6,8 @@ Generated with [lua-aio-scripts](https://github.com/tst2005/lua-aio-scripts)
 Easy to install :
 
 ```sh
-wget https://github.com/tst2005/lua-bundles/raw/master/install.sh
-sh install.sh
+git clone https://github.com/tst2005/lua-bundles .lua-bundles
+cd .lua-bundles && sh install.sh
 ```
 
 It will install in your home in .lua-bundles
